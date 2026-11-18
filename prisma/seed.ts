@@ -4,7 +4,7 @@ import {PrismaPg} from "@prisma/adapter-pg";
 import { PrismaClient, Prisma } from "../src/generated/prisma/client";
 import fs from "fs";
 import path from "path";
-  
+
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL!,
 });
@@ -87,7 +87,7 @@ async function deleteAllData(orderedFileNames: string[]) {
 }
 
 async function main() {
-  const dataDirectory = path.join(__dirname, "seedData");
+  const dataDirectory = path.join(process.cwd(),"prisma", "seedData");
 
   const orderedFileNames = [
     "location.json", // No dependencies

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rimraf dist && npx tsc",
     "start": "node dist/server.js",
-    "dev": "concurrently \"tsc --noEmit -w\" \"tsx watch src/server.ts\""
+    "dev": "concurrently \"tsc --noEmit -w\" \"tsx watch src/server.ts\"",
+    "seed": "tsx prisma/seed.ts"
   },
   "keywords": [],
   "type": "module",
