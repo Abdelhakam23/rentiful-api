@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf dist && npx tsc",
     "start": "node dist/server.js",
-    "dev": "concurrently \"tsc --noEmit -w\" \"tsx watch src/server.ts\"",
+    "dev": "concurrently --kill-others-on-fail -n \"SERVER,TSC\" -c \"green,yellow\" \"tsx watch src/server.ts\" \"tsc --noEmit -w --preserveWatchOutput\"",
     "seed": "tsx prisma/seed.ts",
     "prisma:generate": "prisma generate",
     "postprisma:generate": "shx rm -rf ../rentlful/types/prisma && shx mkdir -p ../rentlful/types/prisma && shx cp -r src/generated/prisma/* ../rentlful/types/prisma/"

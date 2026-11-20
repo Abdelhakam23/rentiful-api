@@ -1,13 +1,15 @@
+import "dotenv/config";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import bodyParser from "body-parser";
+import { authMiddleware } from "./middleware/AuthMiddleware.js";
 
+import tenantsRoutes from "./features/tenants/routes/tenantsRoutes.js";
 
 dotenv.config();
-
 
 const app = express();
 
@@ -19,14 +21,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-
-
-app.get('/',(req,res)=>{
-    res.send('Hello, World!');
-})
+app.use("/tenants", authMiddleware(["tenant"]), tenantsRoutes);
 
 const port = process.env.PORT || 3002;
 
-app.listen(port,()=>{
-    console.log(`Server is running on port ${port}`);
-})
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
