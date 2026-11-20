@@ -7,7 +7,9 @@
     "build": "rimraf dist && npx tsc",
     "start": "node dist/server.js",
     "dev": "concurrently \"tsc --noEmit -w\" \"tsx watch src/server.ts\"",
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts",
+    "prisma:generate": "prisma generate",
+    "postprisma:generate": "shx rm -rf ../rentlful/types/prisma && shx mkdir -p ../rentlful/types/prisma && shx cp -r src/generated/prisma/* ../rentlful/types/prisma/"
   },
   "keywords": [],
   "type": "module",
